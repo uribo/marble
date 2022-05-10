@@ -1,0 +1,59 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# marble
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+marbleはベクトルやデータフレームの特定の変数に対して
+色分けを行うためのR言語のパッケージです。
+
+## インストール方法
+
+現在、marbleはCRANには登録されていませんが、次のコマンドを実行することで
+インストールが可能です。
+
+``` r
+install.packages("marble", repos = "https://uribo.r-universe.dev")
+```
+
+## 利用方法
+
+```{r example}
+library(marble)
+```
+
+`sazareishi()`は日本語の単語を品詞ごとに色分けします。
+
+```{r}
+x <-
+  c(`名詞` = "吾輩", `助詞` = "は", `名詞` = "猫", 
+    `助動詞` = "で", `助動詞` = "ある", `記号` = "。", 
+    `名詞` = "名前", `助詞` = "は", `副詞` = "まだ", 
+    `形容詞` = "無い", `記号` = "。")
+sazareishi(x)
+```
+
+データフレームに単語と品詞の列がある場合、
+`sazareishi_to_df()`によって品詞の列を色分けします。
+
+```{r}
+d <- 
+  data.frame(
+    token = unname(x),
+    POS1 = names(x))
+sazareishi_to_df(d, pos = POS1)
+```
